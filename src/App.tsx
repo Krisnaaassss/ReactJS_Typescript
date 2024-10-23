@@ -11,14 +11,29 @@ function App() {
     );
   };
 
+  const AddToForm = (title: string) => {
+    setTodos((prevTodos) => [
+      {
+        id: prevTodos.length + 1,
+        title,
+        completed: false,
+      },
+      ...prevTodos,
+    ]);
+  };
+
   return (
     <main className="py-10 h-screen">
       <h1 className="font-bold text-3xl mb-5 text-center">To Do List</h1>
-      <div className="max-w-lg mx-auto bg-slate-100 rounded-md p-5">
-        <AddForm />
+      <div className="max-w-lg mx-auto bg-slate-100 rounded-md p-5 space-y-5">
+        <AddForm onSubmit={AddToForm} />
         <div className="space-y-2">
           {todos.map((todo) => (
-            <TodoItem todo={todo} onCompletedChange={setTodoCompleted} />
+            <TodoItem
+              todo={todo}
+              onCompletedChange={setTodoCompleted}
+              key={todo.id}
+            />
           ))}
           {}
         </div>
